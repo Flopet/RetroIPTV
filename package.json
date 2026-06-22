@@ -1,0 +1,15 @@
+{
+  "name": "retroiptv",
+  "version": "0.1.0",
+  "description": "RetroIPTV — lightweight CRT TV player (Electron + mpegts.js)",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^42.4.1"
+  },
+  "dependencies": {
+    "mpegts.js": "^1.8.0"
+  }
+}

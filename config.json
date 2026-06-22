@@ -1,0 +1,13 @@
+{
+  "m3u": "assets/sample/channels.m3u",
+  "xmltv": "assets/sample/epg.xml",
+  "startChannel": 1,
+  "defaultVolume": 0.8,
+  "crt": {
+    "scanlines": true,
+    "scanlineOpacity": 0.18,
+    "vignette": 0.6,
+    "curvature": true,
+    "flicker": true
+  }
+}

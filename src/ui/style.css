@@ -1,0 +1,221 @@
+/* style.css — the entire TV look. Tweak the variables to restyle.
+   Layout is fully responsive (vmin/%/aspect-ratio) so the window resizes. */
+:root {
+  --bezel-light: #3d3d3d;
+  --bezel-dark:  #2a2a2a;
+  --amber:       #ffb000;
+  --scanline-opacity: 0.18;  /* overwritten from config.crt at runtime */
+  --vignette: 0.6;           /* overwritten from config.crt at runtime */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  font-family: "Courier New", monospace;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+/* ---- TV set / bezel ---- */
+.tv {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6vmin;
+  padding: 2vmin;
+  background: linear-gradient(180deg, var(--bezel-light), var(--bezel-dark));
+}
+
+/* ---- screen: fixed 4:3, scales to fit the window ---- */
+.screen {
+  position: relative;
+  height: 82%;
+  aspect-ratio: 4 / 3;
+  max-width: 92%;
+  background: #060608;
+  border-radius: 2vmin;
+  overflow: hidden;
+  box-shadow: inset 0 0 6vmin rgba(0, 0, 0, 0.9);
+}
+
+/* ---- control buttons ---- */
+.controls { display: flex; gap: 1.2vmin; }
+.controls button {
+  min-width: 7vmin;
+  padding: 0.6em 0.9em;
+  color: #e8e8e8;
+  background: linear-gradient(180deg, #555, #444);
+  border: 1px solid #1c1c1c;
+  border-radius: 0.8vmin;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.6vmin;
+  cursor: pointer;
+}
+.controls button:hover { filter: brightness(1.15); }
+.controls button:active { transform: translateY(1px); }
+.controls .power { background: linear-gradient(180deg, #9a3a3a, #7a2a2a); }
+
+/* ---- fullscreen: drop the bezel, fill with the screen ---- */
+body.fs .tv { padding: 0; gap: 0; background: #000; }
+body.fs .controls, body.fs .badge { display: none; }
+body.fs .screen { height: 100%; max-width: 100%; border-radius: 0; }
+
+video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+/* ---- CRT overlay: scanlines + vignette ---- */
+.crt {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(0,0,0,0) 55%, rgba(0,0,0, var(--vignette)) 100%),
+    repeating-linear-gradient(to bottom,
+      rgba(0,0,0, var(--scanline-opacity)) 0px,
+      rgba(0,0,0, var(--scanline-opacity)) 1px,
+      transparent 1px, transparent 3px);
+}
+
+/* optional barrel-curvature illusion */
+body.curved .screen { border-radius: 6vmin / 8vmin; }
+body.curved video   { transform: scale(1.03); }
+
+/* optional flicker */
+@keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.97; } }
+body.flicker .crt { animation: flicker 0.12s infinite; }
+
+/* ---- on-screen display ---- */
+.osd { position: absolute; inset: 0; pointer-events: none; }
+
+.banner {
+  position: absolute;
+  top: 4%; left: 4%; right: 4%;
+  padding: 0.5em 0.7em;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.banner.show { opacity: 1; }
+.banner-title { color: var(--amber); font-size: 2.4vmin; font-weight: bold; }
+.banner-sub {
+  color: #e0e0e0;
+  font-size: 1.6vmin;
+  margin-top: 0.2em;
+}
+.banner-sub:empty { display: none; }
+
+/* 7-segment-style readout: a faint "88" ghost with the live digits on top. */
+.channel {
+  position: absolute;
+  bottom: 4%; right: 4%;
+  display: inline-grid;
+  padding: 0.1em 0.3em;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 4.5vmin;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+.seg-ghost, .seg-digits {
+  grid-area: 1 / 1;
+  text-align: right;
+  min-width: 2ch;
+}
+.seg-ghost { color: rgba(255, 176, 0, 0.13); }
+.seg-digits { color: var(--amber); }
+
+/* ---- direct numeric entry ---- */
+.entry {
+  position: absolute;
+  top: 6%; left: 5%;
+  display: none;
+  color: var(--amber);
+  font-size: 7vmin;
+  font-weight: bold;
+  text-shadow: 0 0 1vmin rgba(255, 176, 0, 0.5);
+}
+.entry.show { display: block; }
+
+.badge {
+  position: absolute;
+  bottom: 1.5%; left: 3%;
+  color: var(--amber);
+  font-weight: bold;
+  font-size: 2vmin;
+  opacity: 0.85;
+}
+
+/* ---- snow / static (shown while tuning or on no signal) ---- */
+.snow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+.snow.show { opacity: 1; }
+
+/* ---- NO SIGNAL banner ---- */
+.nosignal {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--amber);
+  font-size: 5vmin;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 1vmin rgba(0, 0, 0, 0.8);
+}
+.nosignal.show { display: flex; }
+
+/* ---- volume OSD ---- */
+.volume {
+  position: absolute;
+  bottom: 9%; left: 50%;
+  transform: translateX(-50%);
+  width: 52%;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.4em 0.8em;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--amber);
+  font-size: 2vmin;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.volume.show { opacity: 1; }
+.vol-label { white-space: nowrap; }
+.vol-track { flex: 1; height: 1.4vmin; border: 1px solid var(--amber); }
+.vol-fill { height: 100%; width: 0; background: var(--amber); }
+
+/* ---- mute indicator ---- */
+.mute {
+  position: absolute;
+  top: 4%; right: 4%;
+  display: none;
+  color: #ff4040;
+  font-size: 2.2vmin;
+  font-weight: bold;
+}
+.mute.show { display: block; }

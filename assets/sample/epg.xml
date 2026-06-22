@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tv generator-info-name="RetroTV2 sample">
+  <channel id="bbb"><display-name>Big Buck Bunny</display-name></channel>
+  <channel id="ed"><display-name>Elephants Dream</display-name></channel>
+  <channel id="sintel"><display-name>Sintel</display-name></channel>
+
+  <programme channel="bbb" start="20200101000000 +0000" stop="20400101000000 +0000">
+    <title>Bunny Marathon</title>
+  </programme>
+  <programme channel="ed" start="20200101000000 +0000" stop="20400101000000 +0000">
+    <title>Dream Sequence</title>
+  </programme>
+  <programme channel="sintel" start="20200101000000 +0000" stop="20400101000000 +0000">
+    <title>Sintel Feature</title>
+  </programme>
+</tv>

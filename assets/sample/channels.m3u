@@ -1,0 +1,7 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="bbb" tvg-name="Big Buck Bunny" group-title="Demo",Big Buck Bunny
+https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+#EXTINF:-1 tvg-id="ed" tvg-name="Elephants Dream" group-title="Demo",Elephants Dream
+https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4
+#EXTINF:-1 tvg-id="sintel" tvg-name="Sintel" group-title="Demo",Sintel
+https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4
