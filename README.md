@@ -4,8 +4,8 @@ A lightweight desktop "CRT television" that plays IPTV channels (e.g. from an
 [ErsatzTV](https://ersatztv.org) server) with retro styling — scanlines, a
 vignette, channel static, an on-screen display, and a programme guide.
 
-Built with **Electron** + **[mpegts.js](https://github.com/xqq/mpegts.js)** and
-otherwise plain HTML/CSS/JS. One runtime dependency, no build step.
+Built with **Electron** + **[mpegts.js](https://github.com/xqq/mpegts.js)** and plain HTML/CSS/JS.
+One runtime dependency, no build step.
 
 ---
 
@@ -16,8 +16,7 @@ npm install          # first time only (downloads Electron + mpegts.js)
 npm start            # launch the app
 ```
 
-> Run it with **`npm start`**, not `./main.js`. It's an Electron app, not a
-> standalone script.
+> Run it with **`npm start`**
 
 Out of the box it plays a few public MP4 sample channels so you can see it work
 without any server. To watch your own channels, see **Configuration** below.
