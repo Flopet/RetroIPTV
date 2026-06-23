@@ -11,6 +11,8 @@ One runtime dependency, no build step.
 
 ## Quick start
 
+**Prerequisite:** [Node.js](https://nodejs.org) 18 or newer.
+
 ```bash
 npm install          # first time only (downloads Electron + mpegts.js)
 npm start            # launch the app
