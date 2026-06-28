@@ -26,6 +26,7 @@
       • scripts/workers from our own files + blob: (mpegts.js spins up a worker)
       • media + network from http/https/blob: (the actual TS/MP4 streams)
       • inline styles ('unsafe-inline') because renderer.js sets a few CSS vars.
+    CSP Documentation: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP
   -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
@@ -72,7 +73,7 @@
       <button data-act="power" class="power">⏻</button>
     </div>
 
-    <div class="badge">RTV-2</div>
+    <div class="badge">RIPTV</div>
   </div>
 
   <!-- ../../node_modules because this file is two levels deep (src/ui/). -->

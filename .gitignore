@@ -1,3 +1,4 @@
 node_modules/
 .env
 assets/channels.m3u
+.idea/

@@ -37,7 +37,7 @@ html, body {
 .screen {
   position: relative;
   height: 82%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   max-width: 92%;
   background: #060608;
   border-radius: 2vmin;
