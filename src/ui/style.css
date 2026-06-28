@@ -44,6 +44,7 @@ html, body {
   overflow: hidden;
   box-shadow: inset 0 0 6vmin rgba(0, 0, 0, 0.9);
 }
+.tv.ar43 .screen { aspect-ratio: 4 / 3; }
 
 /* ---- control buttons ---- */
 .controls { display: flex; gap: 1.2vmin; }
@@ -63,9 +64,27 @@ html, body {
 .controls button:active { transform: translateY(1px); }
 .controls .power { background: linear-gradient(180deg, #9a3a3a, #7a2a2a); }
 
+/* ---- aspect ratio toggle (top-right of bezel) ---- */
+.ar-toggle {
+  position: absolute;
+  top: 1vmin;
+  right: 1vmin;
+  padding: 0.4em 0.7em;
+  color: #e8e8e8;
+  background: linear-gradient(180deg, #555, #444);
+  border: 1px solid #1c1c1c;
+  border-radius: 0.8vmin;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.4vmin;
+  cursor: pointer;
+}
+.ar-toggle:hover { filter: brightness(1.15); }
+.ar-toggle:active { transform: translateY(1px); }
+
 /* ---- fullscreen: drop the bezel, fill with the screen ---- */
 body.fs .tv { padding: 0; gap: 0; background: #000; }
-body.fs .controls, body.fs .badge { display: none; }
+body.fs .controls, body.fs .badge, body.fs .ar-toggle { display: none; }
 body.fs .screen { height: 100%; max-width: 100%; border-radius: 0; }
 
 video {

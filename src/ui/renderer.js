@@ -28,6 +28,7 @@ const banner = $('banner');
 const bannerTitle = $('banner-title');
 const bannerSub = $('banner-sub');
 const bannerChannel = $('banner-channel');
+const arToggle = $('ar-toggle');
 const nosignal = $('nosignal');
 const entryEl = $('entry');
 const volumeEl = $('volume');
@@ -227,6 +228,12 @@ document.addEventListener('keydown', (e) => {
       else document.documentElement.requestFullscreen();
       break;
   }
+});
+
+arToggle.addEventListener('click', () => {
+  const is43 = document.querySelector('.tv').classList.toggle('ar43');
+  arToggle.textContent = is43 ? '4:3' : '16:9';
+  arToggle.blur();
 });
 
 // On-screen buttons mirror the keyboard. One listener handles all of them via
