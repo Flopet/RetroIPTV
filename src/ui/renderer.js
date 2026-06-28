@@ -27,8 +27,7 @@ const video = $('video');
 const banner = $('banner');
 const bannerTitle = $('banner-title');
 const bannerSub = $('banner-sub');
-const channelEl = $('channel-digits');
-const channelDisplay = $('channel');
+const bannerChannel = $('banner-channel');
 const nosignal = $('nosignal');
 const entryEl = $('entry');
 const volumeEl = $('volume');
@@ -50,7 +49,6 @@ let guide = null;                    // EPG lookup, built from XMLTV in init()
 let player = null;                   // active mpegts.js instance, if any
 let index = 0;                       // index into `channels` of the current channel
 let bannerTimer = null;
-let channelTimer = null;
 let volTimer = null;
 let watchdog = null;
 let entryBuffer = '';                // digits typed for direct channel entry
@@ -152,11 +150,8 @@ function isMpegTs(url) {
 }
 
 function load(ch) {
-  showBanner(`CH ${pad(ch.number)}  ${ch.name}`, nowText(ch));
-  channelEl.textContent = pad(ch.number);
-  channelDisplay.classList.remove('hidden');
-  clearTimeout(channelTimer);
-  channelTimer = setTimeout(() => channelDisplay.classList.add('hidden'), 3000);
+  bannerChannel.textContent = pad(ch.number);
+  showBanner(ch.name, nowText(ch));
 
   // Show static and arm the watchdog until the picture actually arrives.
   nosignal.classList.remove('show');
@@ -211,7 +206,7 @@ function commitEntry() {
   entryEl.classList.remove('show');
   const i = channels.findIndex((c) => c.number === number);
   if (i >= 0) tune(i);
-  else showBanner(`CH ${pad(number)}  — not found`);
+  else { bannerChannel.textContent = pad(number); showBanner('— not found'); }
 }
 
 // ---- 8. controls ----------------------------------------------------------

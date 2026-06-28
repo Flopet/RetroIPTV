@@ -109,6 +109,9 @@ body.flicker .crt { animation: flicker 0.12s infinite; }
   background: rgba(0, 0, 0, 0.55);
   opacity: 0;
   transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .banner.show { opacity: 1; }
 .banner-title { color: var(--amber); font-size: 2.4vmin; font-weight: bold; }
@@ -118,28 +121,13 @@ body.flicker .crt { animation: flicker 0.12s infinite; }
   margin-top: 0.2em;
 }
 .banner-sub:empty { display: none; }
-
-/* 7-segment-style readout: a faint "88" ghost with the live digits on top. */
-.channel {
-  position: absolute;
-  bottom: 4%; right: 4%;
-  display: inline-grid;
-  padding: 0.1em 0.3em;
-  background: rgba(0, 0, 0, 0.7);
-  font-size: 4.5vmin;
+.banner-channel {
+  color: var(--amber);
+  font-size: 4vmin;
   font-weight: bold;
   letter-spacing: 0.1em;
-  opacity: 1;
-  transition: opacity 0.5s ease;
+  margin-left: 1em;
 }
-.channel.hidden { opacity: 0; }
-.seg-ghost, .seg-digits {
-  grid-area: 1 / 1;
-  text-align: right;
-  min-width: 2ch;
-}
-.seg-ghost { color: rgba(255, 176, 0, 0.13); }
-.seg-digits { color: var(--amber); }
 
 /* ---- direct numeric entry ---- */
 .entry {
