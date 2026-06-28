@@ -129,7 +129,10 @@ body.flicker .crt { animation: flicker 0.12s infinite; }
   font-size: 4.5vmin;
   font-weight: bold;
   letter-spacing: 0.1em;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
+.channel.hidden { opacity: 0; }
 .seg-ghost, .seg-digits {
   grid-area: 1 / 1;
   text-align: right;
